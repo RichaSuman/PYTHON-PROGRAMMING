@@ -17,9 +17,10 @@ blocks:
             - 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
             - flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
             - pip install pytest
-        - name: 'Job #2'
+  - name: 'Block #2'
+    task:
+      jobs:
+        - name: 'Job #1'
           commands:
-            - echo $PWD
-            - cd pytest_programming
             - source pytest_env/bin/activate
-            - pytest test_wallet_parameterize.py
+            - pytest pytest_programming/test_wallet_parameterize.py
