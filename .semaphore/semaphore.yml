@@ -19,7 +19,7 @@ blocks:
             - pip install pytest
         - name: 'Job #2'
           commands:
-            - pwd
+            - echo $PWD
             - cd pytest_programming
             - source pytest_env/bin/activate
             - pytest test_wallet_parameterize.py
