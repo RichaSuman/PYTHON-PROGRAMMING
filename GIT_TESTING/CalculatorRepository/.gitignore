@@ -1,0 +1,7 @@
+# .gitignore
+.pytest_cache
+calculator
+
+
+
+__pychace
