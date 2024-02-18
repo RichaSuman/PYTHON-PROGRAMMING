@@ -1,0 +1,42 @@
+* Yield and Return
+    Yield   
+        convert a regular python function into generator.
+
+        # Use of yield 
+            def printresult(String) :  
+            for i in String:  
+                if i == "e":  
+                    yield i  
+
+            # initializing string  
+            String = "GeeksforGeeks" 
+            ans = 0
+            print ("The number of 'e' in word is : ", end = "" )  
+            String = String.strip()  
+
+            for j in printresult(String):  
+            ans = ans + 1
+
+print (ans)  
+
+    Return
+    It used for the end of the execution and “returns” the result to the caller statement. 
+    It can return all type of values and it returns None when there is no expression with the statement “return”.
+    Syntax: return [expression] 
+
+    YIELD Vs RETURN
+    1	Yield is generally used to convert a regular Python function into a generator.
+        	Return is generally used for the end of the execution and “returns” the result to the caller statement.
+    2	Yield replace the return of a function to suspend its execution without destroying local variables.	
+            Return exits from a function and handing back a value to its caller.
+    3	Yield is used when the generator returns an intermediate result to the caller.	
+            Return is used when a function is ready to send a value.
+    4	Code written after yield statement execute in next function call.	
+            while, code written after return statement wont execute.
+    5	Yield can run multiple times.	
+            Return only runs single time.
+    6	Yield statement function is executed from the last state from where the function get paused.	
+            For Return Every function calls run the function from the start.
+
+* Generator 
+    A generator is a special function in Python that returns a generator object to the caller.
