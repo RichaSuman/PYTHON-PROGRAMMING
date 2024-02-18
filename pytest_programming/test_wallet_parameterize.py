@@ -1,11 +1,12 @@
 import pytest
-from wallet import Wallet, InsufficientAmount
+from wallet import Wallet
 
         
 @pytest.fixture
 def my_wallet():
     '''Return a Wallet instance with a zero balance'''
     return Wallet()
+
 
 @pytest.mark.parametrize("earned,spent,expected",[
     (70,30,40),
