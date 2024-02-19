@@ -1,0 +1,24 @@
+# To remove files from git 
+git rm new_f*
+git commit -m "delete new_folder"
+git push
+# To add a file to git and then delete it (to test undo)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+
+  In your case, use git filter-branch instead of git rm.
+  git rm will delete the files in the sense that they will not be tracked by git anymore, but that does not remove the old commit objects corresponding to those images, 
+  and so you will still be stuck with pushing the earlier commits which correspond to 12GB of images.
+  The git filter-branch, on the other hand, can remove those files from all the previous commits as well, thus doing away with the need to push any of them.
+
+  git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch GIT_TESTING/CalculatorRepository' --tag-name-filter cat -- --all
+
+  ## If you deleted any file or folder that was already tracked by Git, you can recover them using 
+  if git rm -f <file> <folder>
+  ## To restore use 
+  git stash
+
+  ## If there is a change in a existing file that need to be restored the use  following command
+  git restore <filename>

@@ -1,7 +1,5 @@
 # .gitignore
 .pytest_cache
+.coverage
 calculator
-
-
-
-__pychace
+__pycache__
