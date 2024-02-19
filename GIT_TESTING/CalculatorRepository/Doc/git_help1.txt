@@ -22,3 +22,6 @@ Changes not staged for commit:
 
   ## If there is a change in a existing file that need to be restored the use  following command
   git restore <filename>
+
+  # To create a new branch
+  git checkout -b <new_branch_name>
