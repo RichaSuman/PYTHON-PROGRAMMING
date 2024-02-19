@@ -25,3 +25,41 @@ git checkout -b my_new_feature
 # Git has a built-in way to compare the state of two branches so you don’t have to work so hard. It’s the show-branch command
 git show-branch my_new_feature master
 git show-branch --sha1-name my_new_feature master
+
+# There are three main ways to get commits from one branch to another: merging, rebasing, and cherry-picking
+
+# Now, we want to get that commit 4a4f449 to be on master. Check out master and run the git merge command there
+1. git merge
+    git checkout master
+    # Switched to branch 'master'
+
+    git merge my_new_feature
+
+    # If the same section of code has been modified in both branches, Git can’t figure out what to do. 
+    # When this happens, it stops the merge part way through and gives you instructions for how to fix the issue. This is called a merge conflict.
+
+2. Cherry-Picking
+    git show-branch --sha1-name my_new_feature master
+    # Then cherry-pick the commit
+    git cherry-pick 4a4f4492ded256aa7b29bf5176a17f9eda66efbb 
+
+
+# Working with Remote Repos
+# Git clone is the command you use when you have the address of a known repository and you want to make a local copy.
+git clone
+#
+git fetch
+git pull
+git push
+    
+# Summary
+git status - Make sure your current area is clean.
+git pull - Get the latest version from the remote. This saves merging issues later.
+# Edit your files and make your changes. Remember to run your linter and do unit tests!
+git status - Find all files that are changed. Make sure to watch untracked files too!
+git add [files] - Add the changed files to the staging area.
+git commit -m "message" - Make your new commit.
+git push origin [branch-name] - Push your changes up to the remote.
+
+
+
