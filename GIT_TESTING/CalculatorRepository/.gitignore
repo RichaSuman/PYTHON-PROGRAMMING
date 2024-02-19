@@ -1,0 +1,5 @@
+# .gitignore
+.pytest_cache
+.coverage
+calculator
+__pycache__
