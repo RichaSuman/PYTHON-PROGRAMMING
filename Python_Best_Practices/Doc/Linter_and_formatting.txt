@@ -1,0 +1,31 @@
+https://realpython.com/python-pep8/#when-to-ignore-pep-8
+
+Linters
+    Linters are programs that analyze code and flag errors. 
+
+    Some good linters for Python code are pycodestyle, flake8, and ruff
+
+    Another popular option for linting your Python code is flake8. 
+    It’s a tool that combines other projects, such as error detection using pyflakes, with pycodestyle.
+
+    Another popular linter for your Python code is pylint.
+
+    pip install pycodestyle
+    pip install flake8
+
+# AUTO-FORMATTERS
+    Once such program is black,
+    Two other autoformatters, autopep8 and yapf, perform actions that are similar to what black does.
+    Ruff also supports autoformatting.
+
+    pip install black
+
+Combined Tooling
+    Ruff is a popular tool in the Python community that can act as both a linter and an autoformatter
+
+https://realpython.com/python-code-quality/#what-is-code-quality
+
+multiple linters packaged nicely together- Combo linter
+    Pylama: A code audit tool composed of a large number of linters and other tools for analyzing code
+    Flake8: Capable of detecting both logical and stylistic lint.
+
