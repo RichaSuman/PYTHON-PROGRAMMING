@@ -1,0 +1,44 @@
+https://earthly.dev/blog/python-makefile/
+
+VENV = pytest_venv
+PYTHON = $(VENV)/bin/python3
+PIP = $(VENV)/bin/pip
+
+hello:
+	echo "Hello, World"
+	echo "This line will print if the file hello does not exist."
+
+run:
+	"/home/richa-mishra/Desktop/Python Programming/.venv/bin/python" "/home/richa-mishra/Desktop/Python Programming/pytest_programming/wallet.py"
+
+clean:
+    rm -rf __pycache__
+	 rm -rf $(VENV)
+
+setup: requirement.txt
+	pip install -r requirements.txt
+
+venv/bin/activate: requirements.txt
+ python3 -m venv $(VENV)
+ ./$(VENV)/bin/pip install -r requirements.txt
+
+ run: $(VENV)/bin/activate
+ ./$(VENV)/bin/python3 app.py
+
+
+help: ## Display this help message.
+    @echo "Please use \`make <target>' where <target> is one of"
+    @awk -F ':.*?## ' '/^[a-zA-Z]/ && NF==2 {printf "\033[36m  %-28s\033[0m %s\n", $$1, $$2}' Makefile | sort
+
+requirements: ## install development environment requirements
+    pip install -r requirements.txt
+
+upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
+upgrade: ## Upgrade requirements with pip-tools.
+    pip install -qr requirements/pip-tools.txt
+    pip-compile --upgrade -o requirements/pip-tools.txt requirements/pip-tools.in
+    pip-compile --upgrade -o requirements/base.txt requirements/base.in
+    pip-compile --upgrade -o requirements/doc.txt requirements/doc.in
+    pip-compile --upgrade -o requirements/dev.txt requirements/dev.in
+
+selfcheck: ## Check that the Makefile is free of Make syntax errors.

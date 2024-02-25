@@ -13,3 +13,6 @@ class Wallet(object):
         if self.balance < amount:
             raise InsufficientAmount('Not enough available to spend{}'.format(amount))
         self.balance -= amount
+        
+
+print("The run completed successfully") 
