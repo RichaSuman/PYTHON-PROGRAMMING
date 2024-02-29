@@ -1,0 +1,203 @@
+* pytest
+    It is a framework to write testcases and run them against our code to check the bugs.
+    It is easy to use.
+    It searches for files with names starting with `test_` or ending with `_test.py` and collects test functions or methods within those files.
+    
+
+    options:
+    pytest -k "sum or multiplication"
+        This command will run all tests with names containing "sum" or "multiplication."
+    pytest -n 4
+        This command will run tests in parallel using four threads.
+    pytest --pdb
+        For Debugging
+    pytest -v
+        Verbose output
+    pytest --duration
+        To check for the slow running job
+    pytest <file_name>::<func_name>
+        To run a perticular function
+
+* built-in pyton hooks
+    Some examples of built-in python hooks provided by pytest are:
+    -pytest_addoption(parser)
+    -pytest_configure(config)
+    -pytest_runtest_setup(item)
+    -pytest_runtest_call(item)
+    -pytest_runtest_teardown(item)
+    -pytest_runtest_makereport(item, call)
+    -pytest_collection_modifyitems(config, items)
+    -pytest_unconfigure(config)
+    -The pytest_namespace() hook allows a plugin to expose additional objects and functions to the pytest namespace.
+         This can be used to make custom fixtures functions available to tests.
+        
+* Pytest Plugins
+    PyTest plugins are extensions that provide additional functionality and features to PyTest. 
+    They can be used to customize test behavior, generate reports.
+    
+    pip install pytest-html
+        To enable the HTML report plugin, you can use the `--html` option during test execution:
+            pytest --html=report.html
+
+    pip install pytest-cov
+        This command runs tests and generates a coverage report for the "myproject" package.
+            pytest --cov=myproject
+    
+    pip install pytest-xdist
+        This command generates a JUnit XML report named "report.xml" after the tests complete.
+            pytest --junitxml=report.xml
+
+* Markers:
+    skip, xfail, run, and parametrize
+    
+* xfail
+    You can mark a test as expected to fail by using the `@pytest.mark.xfail` decorator. 
+    It allows you to indicate that a test is known to fail and will be fixed in the future.
+    A common example is a test for a feature not yet implemented, or a bug not yet fixed.
+        Example:
+
+        import pytest
+        
+        @pytest.mark.xfail
+        def test_division():
+            assert 1 / 0 == 1  # This test is expected to fail
+
+        @pytest.mark.xfail(sys.platform == "win32", reason="bug in a 3rd party library")
+        def test_function():
+
+* skip
+    You can skip a test in PyTest by using the `@pytest.mark.skip` decorator or the `pytest.skip` function inside the test function or method.
+    example to skip a test when an external resource which is not available at the moment 
+        Example:
+
+        import pytest
+
+        @pytest.mark.skip
+        def test_feature():
+            # Skipped test
+            pass
+        
+        @pytest.mark.skip(reason="no way of currently testing this")
+        def test_another_feature():
+        
+
+* self.skipTest()
+    When you call self.skipTest() from inside a test method, the test method is skipped and the next test method is executed.
+
+* skipif
+    The skipif decorator is used to skip a test if a certain condition is met.
+    For example, you might use this decorator to skip a test if a certain module is not installed.
+    import sys
+    @pytest.mark.skipif(sys.version_info < (3, 10), reason="requires python3.10 or higher")
+    def test_function():
+
+    *Example:
+        import sys
+        import pytest
+        @pytest.mark.parametrize(
+            ("n", "expected"),
+            [
+                (1, 2),
+                pytest.param(1, 0, marks=pytest.mark.xfail),
+                pytest.param(1, 3, marks=pytest.mark.xfail(reason="some bug")),
+                (2, 3),
+                (3, 4),
+                (4, 5),
+                pytest.param(
+                    10, 11, marks=pytest.mark.skipif(sys.version_info >= (3, 0), reason="py2k")
+                ),
+            ],
+        )
+        def test_increment(n, expected):
+            assert n + 1 == expected
+
+* Fixture
+Fixtures in PyTest are functions or methods used to set up preconditions and provide test data or resources needed for testing.
+They help in isolating test cases from test data and reducing duplication.
+A fixture can be defined using the `@pytest.fixture` decorator on a function or a method. 
+The fixture function can provide the necessary setup and teardown logic
+
+    * Example: 
+    import pytest
+
+    @pytest.fixture
+    def setup_data():
+        # Setup logic
+        data = [1, 2, 3]
+        yield data  # Return the fixture value
+
+        # Teardown logic (executed after each test that uses the fixture)
+        data.clear()
+
+    You can use a fixture in a test function by including its name as a parameter. 
+    PyTest automatically resolves the fixture and provides it as an argument to the test function
+
+    * Example
+    def test_sum(setup_data):
+        assert sum(setup_data) == 6  # Uses the setup_data fixture
+
+*   conftest.py
+        Specify fixture or other configuration options that apply to a complete test suite.
+        https://pytest-with-eric.com/pytest-best-practices/pytest-conftest/#Defining-Pytest-Fixtures-using-conftest-py
+
+PyTest provides a rich set of built-in assertions, including:
+
+    - `assert`: Asserts that a condition is true.
+    
+    - `assertEqual`: Asserts that two values are equal.
+    
+    - `assertTrue`: Asserts that a value is true.
+    
+    - `assertFalse`: Asserts that a value is false.
+    
+    - `assertRaises`: Asserts that a specific exception is raised.
+    
+    - `assertIn`: Asserts that a value is present in a collection.
+    
+    - `assertNotIn`: Asserts that a value is not present in a collection.
+    
+    - `assertIsNone`: Asserts that a value is None.
+    
+    - `assertIsNotNone`: Asserts that a value is not None.
+    
+    
+* How can you assert that a specific exception is raised in PyTest?
+    - PyTest provides the `pytest.raises` context manager to assert that a specific exception is raised during the execution of a block of code.
+    Example:
+    
+    import pytest
+    
+    def divide(x, y):
+        if y == 0:
+            raise ZeroDivisionError("division by zero")
+        return x / y
+    
+    def test_division_by_zero():
+        with pytest.raises(ZeroDivisionError):
+            divide(1, 0)  # Expects ZeroDivisionError to be raised
+
+* How can you assert that a certain code block does not raise any exceptions in PyTest?
+    - You can use the `pytest.raises` context manager with the `DoesNotRaise` argument to assert that a specific code block does not raise any exceptions.
+        Example:
+            
+            import pytest
+            
+            def add(x, y):
+                return x + y
+            
+            def test_addition_no_exceptions():
+                with pytest.raises(pytest.raises._pytest.outcomes.Exit):
+                    with pytest.raises(pytest.raises._pytest.outcomes.Exit) as excinfo:
+                        add(2, 3)
+                assert excinfo.value is None  # Expects no exceptions to be raised
+
+* assertRaises and assertRaisesRegexp
+    AssertRaises will check that an exception is raised during the execution of a certain block of code
+    AssertRaisesRegexp will do the same thing, but it will also check that the exception raised matches a certain regular expression.
+
+* MonkeyPatching
+Monkeypatching is the process of dynamically altering the behavior of a function or object at runtime. 
+This can be useful for testing purposes, as it allows you to mock out certain parts of your code in order to test how the rest of the code behaves.
+
+
+

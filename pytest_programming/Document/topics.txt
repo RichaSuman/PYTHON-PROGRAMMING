@@ -1,0 +1,15 @@
+pytest  
+    fixture
+        yield
+        Parameterize a fixture (param argument)
+        setup & tear down 
+    mocking
+    pytest.skip
+    conftest.py
+    Monkeypatching
+    xfail, skip
+    pytest.raise & assert_raise
+    Test runner in pytest
+    Test coverage report
+        pytest_cov package
+    hook

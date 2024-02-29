@@ -1,0 +1,56 @@
+* How is Exception Handling done in Python?
+
+    Try: Try is the block of a code that is monitored for errors.
+            It enables you to test a code block for errors.
+    Except: This block gets executed when an error occurs.
+            It is used to handle exceptions arising in the previous try clause.
+    Catch: The beauty of the final block is to execute the code after trying for error. 
+            This block gets executed irrespective of whether an error occurred or not.
+            Finally block is used to do the required cleanup activities of objects/variables.
+    Raises: raise() is a function that interrupts the normal execution process of a program. 
+            It signals the presence of special circumstances such as exceptions or errors.
+
+            https://www.coursera.org/tutorials/python-exception
+            
+    try:
+        answer = "one" + 2
+    except(TypeError):
+        print("check that we are adding 2 integer or float")
+
+    a = 5
+    b = 0
+    try:
+        quotient = a / b
+    except:
+        print("You cannot divide by zero")
+
+   
+## How to catch a specific exception
+    a = 5
+    b = "zero"    
+    try:
+        quotient = a / b
+        print(quotient)
+    except (ZeroDivisionError, TypeError, NameError):
+        print("This division is impossible")
+    except:
+        print("Other error")
+
+## How to raise an exception in Python
+    x = -5
+    if not type(x) is str:
+        raise TypeError("Sorry, only strings are allowed")
+
+    x = -5
+    if x < 0:
+        raise Exception("Sorry, please enter a number greater than or equal to 0")
+
+# To print the exception in python
+    a = 5
+    b = 0
+    try:
+        quotient = a / b
+        print(quotient)
+    except Exception as X:
+        print(X)
+    
