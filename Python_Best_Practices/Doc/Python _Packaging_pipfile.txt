@@ -1,0 +1,135 @@
+https://realpython.com/pipenv-guide/#problems-that-pipenv-solves
+https://docs.pipenv.org/advanced/#configuration-with-environment-variables
+
+
+# To install project dependent packages , run the following command in your terminal:
+pip freeze > requirements.txt
+pip install -r requirements.txt
+# The different sections separate dependencies needed only for development from ones needed for the base code to actually work.
+# Typically, this would be accomplished with additional requirements files like dev-requirements.txt or test-requirements.txt
+
+.env file
+# Pipenv supports the automatic loading of environmental variables when a .env file exists in the top-level directory.
+
+setup.py
+# install_requires keyword should include whatever the package “minimally needs to run correctly.”
+
+# Pipenv has virtual environment management built in so that you have a single tool for your package management. 
+pip install pipenv
+
+# It also introduces two new files, 
+    # the Pipfile (which is meant to replace requirements.txt) and
+    # the Pipfile.lock (which enables deterministic builds).
+# Pipenv uses pip and virtualenv under the hood but simplifies their usage with a single command line interface.
+
+# If you run pipenv install it should automatically detect the requirements.txt and convert it to a Pipfile,
+# From requirement.txt
+pipenv install -r requirements.txt
+pipenv install -r dev-requirements.txt --dev
+
+# generate requirements files from a Pipfile:
+pipenv lock -r > requirements.txt
+pipenv lock -r -d > dev-requirements.txt
+pipenv lock -r
+
+## Example Usage
+# To shart a shell
+pipenv shell
+
+# Install packages
+pipenv install flask==0.12.1
+pipenv install numpy
+pipenv install -e git+https://github.com/requests/requests.git#egg=requests
+    # Use pipenv install '-e .'
+    # That will result in a line in your Pipfile that looks something like "e1839a8" = {path = ".", editable = true}.
+pipenv install pytest --dev ## only for development and not for production
+
+# you need to lock your environment so you can ensure you have the same one in production
+# This will create/update your Pipfile.lock, which you’ll never need to (and are never meant to) edit manually.
+# You should always use the generated file
+pipenv lock
+
+# install the last successful environment recorded
+pipenv install --ignore-pipfile
+
+# This installs all the dependencies needed for development, 
+# which includes both the regular dependencies and those you specified with the --dev argument during install.
+pipenv install --dev
+
+# See the packages and their dependencies
+pipenv graph
+pipenv graph --reverse
+
+# You can run a command in the virtual environment without launching a shell:
+pipenv run <command - ls , pwd>
+
+# Automatic loading .env
+# If a .env file is present in your project, $ pipenv shell and $ pipenv run will automatically load it,
+pipenv run python
+Loading .env environment variables...
+Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os
+>>> os.environ['HELLO']
+'WORLD'
+
+# If your .env file is located in a different path or has a different name you may set the PIPENV_DOTENV_LOCATION environment variable:
+PIPENV_DOTENV_LOCATION=/path/to/.env pipenv shell
+
+# To prevent pipenv from loading the .env file, set the PIPENV_DONT_LOAD_ENV environment variable:
+PIPENV_DONT_LOAD_ENV=1 pipenv shell
+
+# Check for security vulnerabilities (and PEP 508 requirements) in your environment
+pipenv Check
+
+#To open a module
+pipenv open <module>
+
+## To uninstall a package
+pipenv uninstall numpy
+pipenv uninstall --all
+$ pipenv uninstall --all-dev #  only dev packages
+
+
+# How to find out where your virtual environment is:
+pipenv --venv
+
+# How to find out where your project home is:
+pipenv --where
+
+
+# Configuration With Environment Variables
+# pipenv comes with a handful of options that can be enabled via shell environment variables. To activate them, simply create the variable in your shell and pipenv will detect it.
+
+PIPENV_DEFAULT_PYTHON_VERSION — Use this version of Python when creating new virtual environments, by default (e.g. 3.6).
+PIPENV_SHELL_FANCY — Always use fancy mode when invoking pipenv shell.
+PIPENV_VENV_IN_PROJECT — If set, use .venv in your project directory instead of the global virtualenv manager pew.
+PIPENV_COLORBLIND — Disable terminal colors, for some reason.
+PIPENV_NOSPIN — Disable terminal spinner, for cleaner logs. Automatically set in CI environments.
+PIPENV_MAX_DEPTH — Set to an integer for the maximum number of directories to recursively search for a Pipfile.
+PIPENV_TIMEOUT — Set to an integer for the max number of seconds Pipenv will wait for virtualenv creation to complete. Defaults to 120 seconds.
+PIPENV_IGNORE_VIRTUALENVS — Set to disable automatically using an activated virtualenv over the current project’s own virtual environment.
+PIPENV_PIPFILE — When running pipenv from a $PWD other than the same directory where the Pipfile is located, instruct pipenv to find the Pipfile in the location specified by this environment variable.
+PIPENV_VENV_IN_PROJECT - to set venv in the project/.env
+
+# This will tell Pipenv to lock all your setup.py–declared dependencies.
+pipenv install -e
+
+# setup.py
+https://pythonforthelab.com/blog/how-create-setup-file-your-project/
+https://earthly.dev/blog/create-python-package/
+https://www.geeksforgeeks.org/what-is-setup-py-in-python/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
