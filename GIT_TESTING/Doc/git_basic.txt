@@ -1,17 +1,28 @@
 https://realpython.com/python-git-github-intro/#what-is-git
 
 git config --global user.name "your name goes here"
+git config --global user.email "your email goes here"
 git config --global init.defaultBranch main
 
 # To get the info about the directory connect to local  git repository:
 git remote -v
-git remote set-url origin git@gitlab.name.com:team9083508/test_gitlab.git # change URL for remote repository 
+# to create a new repository
+git clone git@gitlab.com:team9083508/test_gitlab.git
+or 
+# To push it to an existing folder
+git remote add origin https://gitlab.com/team9083508/test_gitlab.git
+
+# change URL for remote repository 
+git remote set-url origin git@gitlab.name.com:team9083508/test_gitlab.git 
 from :
 # origin   https://gitlab.name.com/project/repo.git (fetch)
 # origin   https://gitlab.name.com/project/repo.git (push)
 To:
 # origin   git@gitlab.name.com:project/repo.git (fetch)
 # origin   git@gitlab.name.com:project/repo.git (push)
+
+#  vice versa
+git remote set-url origin https://gitlab.com/team9083508/test_gitlab.git 
 check ssh -Tv git@gitlab.name.com
 git remote set-url origin https://gitlab.com/team9083508/test_gitlab.git #  vice versa
 
@@ -72,6 +83,9 @@ git status - Find all files that are changed. Make sure to watch untracked files
 git add [files] - Add the changed files to the staging area.
 git commit -m "message" - Make your new commit.
 git push origin [branch-name] - Push your changes up to the remote.
+
+## 
+git switch -c main # to check
 
 
 
