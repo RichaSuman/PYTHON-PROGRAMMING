@@ -2,6 +2,7 @@
 git rm new_f*
 git commit -m "delete new_folder"
 git push
+git push --set-upstream origin feature
 # To add a file to git and then delete it (to test undo)
 
 Changes not staged for commit:

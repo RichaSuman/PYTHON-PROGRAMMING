@@ -3,6 +3,18 @@ https://realpython.com/python-git-github-intro/#what-is-git
 git config --global user.name "your name goes here"
 git config --global init.defaultBranch main
 
+# To get the info about the directory connect to local  git repository:
+git remote -v
+git remote set-url origin git@gitlab.name.com:team9083508/test_gitlab.git # change URL for remote repository 
+from :
+# origin   https://gitlab.name.com/project/repo.git (fetch)
+# origin   https://gitlab.name.com/project/repo.git (push)
+To:
+# origin   git@gitlab.name.com:project/repo.git (fetch)
+# origin   git@gitlab.name.com:project/repo.git (push)
+check ssh -Tv git@gitlab.name.com
+git remote set-url origin https://gitlab.com/team9083508/test_gitlab.git #  vice versa
+
 $ mkdir example
 $ cd example
 git init
@@ -49,8 +61,8 @@ git show-branch --sha1-name my_new_feature master
 git clone
 #
 git fetch
-git pull
-git push
+git pull -u origin main
+git push -u origin feature
     
 # Summary
 git status - Make sure your current area is clean.
