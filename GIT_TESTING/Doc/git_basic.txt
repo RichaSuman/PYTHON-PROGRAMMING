@@ -1,0 +1,91 @@
+https://realpython.com/python-git-github-intro/#what-is-git
+
+git config --global user.name "your name goes here"
+git config --global user.email "your email goes here"
+git config --global init.defaultBranch main
+
+# To get the info about the directory connect to local  git repository:
+git remote -v
+# to create a new repository
+git clone git@gitlab.com:team9083508/test_gitlab.git
+or 
+# To push it to an existing folder
+git remote add origin https://gitlab.com/team9083508/test_gitlab.git
+
+# change URL for remote repository 
+git remote set-url origin git@gitlab.name.com:team9083508/test_gitlab.git 
+from :
+# origin   https://gitlab.name.com/project/repo.git (fetch)
+# origin   https://gitlab.name.com/project/repo.git (push)
+To:
+# origin   git@gitlab.name.com:project/repo.git (fetch)
+# origin   git@gitlab.name.com:project/repo.git (push)
+
+#  vice versa
+git remote set-url origin https://gitlab.com/team9083508/test_gitlab.git 
+check ssh -Tv git@gitlab.name.com
+git remote set-url origin https://gitlab.com/team9083508/test_gitlab.git #  vice versa
+
+$ mkdir example
+$ cd example
+git init
+
+git status # status on repo
+git add hello.py
+git commit -m "creating hello.py"
+git status # after each step to know the status
+git push -f origin main # If the git push  fails, try using `+` instead of `-f`. This will force the upload the files on git server
+
+# Git log shows you the history of the commits that you have made up to this point
+git log
+
+# To change where we are in our history, we will use the git checkout command to tell Git which SHA we want to look at
+git checkout 946b99bfe1641102d39f95616ceaab5c3dc960f9
+
+git checkout -b my_new_feature
+# Switched to a new branch 'my_new_feature'
+
+# Git has a built-in way to compare the state of two branches so you don’t have to work so hard. It’s the show-branch command
+git show-branch my_new_feature master
+git show-branch --sha1-name my_new_feature master
+
+# There are three main ways to get commits from one branch to another: merging, rebasing, and cherry-picking
+
+# Now, we want to get that commit 4a4f449 to be on master. Check out master and run the git merge command there
+1. git merge
+    git checkout master
+    # Switched to branch 'master'
+
+    git merge my_new_feature
+
+    # If the same section of code has been modified in both branches, Git can’t figure out what to do. 
+    # When this happens, it stops the merge part way through and gives you instructions for how to fix the issue. This is called a merge conflict.
+
+2. Cherry-Picking
+    git show-branch --sha1-name my_new_feature master
+    # Then cherry-pick the commit
+    git cherry-pick 4a4f4492ded256aa7b29bf5176a17f9eda66efbb 
+
+
+# Working with Remote Repos
+# Git clone is the command you use when you have the address of a known repository and you want to make a local copy.
+git clone
+#
+git fetch
+git pull -u origin main
+git push -u origin feature
+    
+# Summary
+git status - Make sure your current area is clean.
+git pull - Get the latest version from the remote. This saves merging issues later.
+# Edit your files and make your changes. Remember to run your linter and do unit tests!
+git status - Find all files that are changed. Make sure to watch untracked files too!
+git add [files] - Add the changed files to the staging area.
+git commit -m "message" - Make your new commit.
+git push origin [branch-name] - Push your changes up to the remote.
+
+## 
+git switch -c main # to check
+
+
+
