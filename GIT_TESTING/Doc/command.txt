@@ -31,6 +31,7 @@ $ pytest -v --cov
 git add test_calculator.py
 git commit -m "Add unit tests for calculator"
 git push
+# git push --set-upstream git@gitlab.com:user_name/work.git master
 
 
 
